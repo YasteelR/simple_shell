@@ -70,7 +70,7 @@ int main(int ac, char **av)
 		if (isatty(fileno(stdin)))
 		{
 			isPipe = 1;
-			_puts("#cisfun$");
+			_puts("#cisfun$ ");
 		}
 		getline(&buffer, &bufsize, stdin);
 		buffer[_strlen(buffer) - 1] = '\0';
