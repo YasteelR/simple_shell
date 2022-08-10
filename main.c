@@ -50,6 +50,8 @@ int main(int ac, char **av)
 	int isPipe = 0;
 	char *buffer;
 
+	signal(SIGINT, get_sigint);
+
 	if (ac >= 2)
 	{
 		if (execve(av[1], av, NULL) == -1)
