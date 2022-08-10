@@ -1,19 +1,75 @@
 #ifndef main_h__
 #define main_h__
 
+#include <stdarg.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/wait.h>
-#include <string.h>
+#include <sys/stat.h>
+#include <time.h>
+#include <stdbool.h>
 
-int _strlen(const char *s);
-char *_strcpy(char *dest, const char *src);
-int _putchar(char c);
-void _puts(char *str);
-unsigned int nbr_spaces(char *s);
-char **string_to_tokens(char *str);
-void get_sigint(int sig);
+/* environment variables */
+extern char **environ;
+extern __sighandler_t signal(int __sig, __sighandler_t __handler);
+
+/* handle built ins */
+int checker(char **cmd, char *buf);
+void prompt_user(void);
+void handle_signal(int m);
+char **tokenizer(char *line);
+char *test_path(char **path, char *command);
+char *append_path(char *path, char *command);
+int handle_builtin(char **command, char *line);
+void exit_cmd(char **command, char *line);
+
+void print_env(void);
+
+/* string handlers */
+int _strcmp(char *s1, char *s2);
+int _strlen(char *s);
+int _strncmp(char *s1, char *s2, int n);
+char *_strdup(char *s);
+char *_strchr(char *s, char c);
+
+void execution(char *cp, char **cmd);
+char *find_path(void);
+
+/* helper function for efficient free */
+void free_buffers(char **buf);
+
+/**
+ * struct builtin - struct that contains builtin commands
+ * @env: environmental variable
+ * @exit: exit commads
+ */
+struct builtin
+{
+	char *env;
+	char *exit;
+} builtin;
+
+/**
+ * struct info - has information abourt he commajd
+ * @final_exit: the last exit
+ * @ln_count: number of lines
+ */
+struct info
+{
+	int final_exit;
+	int ln_count;
+} info;
+
+/**
+ * struct flags - flags
+ * @interactive: interactives
+ */
+struct flags
+{
+	bool interactive;
+} flags;
 
 #endif
