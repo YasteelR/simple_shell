@@ -18,11 +18,11 @@ unsigned int nbr_spaces(char *s)
 }
 
 /**
- * string_to_token - split into multiple words
+ * string_to_tokens - split into multiple words
  * @str: the string passed as argument
  * Return: token
  */
-char **stringToTokens(char *str)
+char **string_to_tokens(char *str)
 {
 	int i = 0;
 	const char separator[] = " ";
